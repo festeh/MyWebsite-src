@@ -14,11 +14,6 @@ menu:
     title: About
     url: /about/
     weight: 1
-  - identifier: archive
-    name: Archive
-    title: Archive
-    url: /posts/
-    weight: 0
 
 
 params:
