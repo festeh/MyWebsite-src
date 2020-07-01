@@ -21,7 +21,7 @@ params:
   description: ""
   images:
     - images/og-featured.png # relative path to "static" directory
-  dateFormat: "2006-01-02"
+  dateFormat: "2 Jan 06"
   paginationSinglePost: true
   tabTitle: "Dima Lipin's Personal Website"
 
