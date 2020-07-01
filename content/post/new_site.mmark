@@ -1,7 +1,7 @@
 ---
 title: "Creating a personal website from scratch"
 date: 2020-07-01T12:52:57+03:00
-draft: true
+draft: false
 summary: How to create a website with Hugo, host it on GitHub pages and add CloudFlare support.
 katex: true
 markup: "mmark"
