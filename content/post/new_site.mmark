@@ -7,33 +7,33 @@ katex: true
 markup: "mmark"
 ---
 # Introduction
-One day I came up with an idea to create a technical blog to share knowledge with the world. While the most obvious idea is to use Medium, I don't like it very much because of it nagging "3 free articles per month". Besides, while there are so many people writing about Machine Learning there,  site owners cannot simply allow to write LaTeX formulas, without tricks like pasting images with formulas. So I decided to create a personal website.
+One day I came up with an idea to create a technical blog to share knowledge with the world. While the most obvious idea is to use Medium, I don't like it very much because of its nagging "3 free articles per month" feature. Besides, while there are so many people writing about Machine Learning there, Medium owners cannot simply add the ability to write in LaTeX without tricks like pasting images with rendered formulas. So I decided to create a personal website.
 $$\mathcal{L}_{D}^{GAN} =
 \mathbb{E}_{x \sim p_{d}}[\log D(x)] - \mathbb{E}_{\hat x \sim p_{g}}[\log (1 - D(\hat x))]
 $$ - take this, Medium!
 
-There are a plenty options that will generate your site in seconds like Wordpress, but as Fred Durst told us:
+There are plenty of options that will instantly generate your site like Wordpress, but as Fred Durst told us:
 <blockquote>
   If you want something done right - you just do it yourself.
 </blockquote>
-so I advise you to take a strong and independent way and use [Hugo](https://gohugo.io/) static site generator. A week ago I was a complete noob and had no clue about how to generate a website and host it. I'm still a noob but at least I read some tutorials. [This](https://www.toptal.com/github/unlimited-scale-web-hosting-github-pages-cloudflare) and [this](https://medium.com/@asishrs/automate-your-github-pages-deployment-using-hugo-and-actions-518b959a51f9) helped me a lot and this post basically combines them into one, but additionally it contains some fixes that I had to add so everything started to work properly.
+so I advise you to take a strong and independent way and use [Hugo](https://gohugo.io/) static site generator. A week ago I was a complete noob and had no clue about how to generate a website and host it. I'm still a noob but at least I read some tutorials. [This](https://www.toptal.com/github/unlimited-scale-web-hosting-github-pages-cloudflare) and [this](https://medium.com/@asishrs/automate-your-github-pages-deployment-using-hugo-and-actions-518b959a51f9) helped me a lot and this post basically combines them into one, but additionally it contains some fixes that I had to add so everything started to work properly and has an improved deploy script.
 
 # Creating site content with Hugo
-Hugo allows you to generate plain html files that you can place on a webserver. So your site will be static and all interaction with users should be done via JavaScript. For example, if you want to add comments, you can embed [Disqus](https://help.disqus.com/en/articles/1717112-universal-embed-code) code on your pages.
-Hugo is easy to start with - just watch some tutorials (I watched [this](https://www.mikedane.com/static-site-generators/hugo/) series), pick a [theme](https://themes.gohugo.io/) and you're good to (hu)go! After you add some content to your site, initialize a git repository in the root folder and push it to GitHub.
+Hugo allows you to generate plain html files that you can place on a webserver. So your site will be static and all interactions with users should be done via JavaScript. For example, if you want to add comments, you can embed [Disqus](https://help.disqus.com/en/articles/1717112-universal-embed-code) code on your pages.
+Hugo is easy to start with - just watch some tutorials (I watched [this](https://www.mikedane.com/static-site-generators/hugo/) series), pick a [theme](https://themes.gohugo.io/) and you're good to (hu)go! After you add some content to your site, initialize a git repository in the root folder and the sources of your site to GitHub.
 
 # Automatically deploy your website to GitHub Pages
-I believe that deployment should be automated as much as possible. Ideally, when you add some changes to your website and push them to remote repository (let's call it source), your website should magically update itself. And [GitHub Actions](https://github.com/features/actions) is a secret sauce that we need. We want to construct a pipeline that works on a remote server and do these steps on a push to source repository
+I believe that deployment should be automated as much as possible. Ideally, when you add some changes to your website and push them to remote repository (let's call it source),  your website should magically update itself. And [GitHub Actions](https://github.com/features/actions) is a secret sauce that we need. We want to construct a pipeline that works on a remote server and do these steps when a push to source repository occurs
 
 1. Downloads source repository
 2. Installs hugo
 3. Builds site with hugo
-4. Pushes generated files to another repository (target)
+4. Pushes generated files to another repository (let's call it target)
 
-Then you can use GitHub Pages to host your static website from a target repository. GitHub pages allows free hosting for websites with some constraints (target repository size should be $$\le $$ 1GB, bandwidth is $$\le$$ 100GB/month, your repository will be publicly visible), but they are totally feasible for a personal blog.
+Then you can use GitHub Pages to host your static website from a target repository. GitHub Pages offers free hosting for static websites with some constraints (target repository size should be $$\le $$ 1GB, bandwidth is $$\le$$ 100GB/month, your repository will be publicly visible), but they are totally feasible for a personal blog.
 
 # Deploying instruction
-First, create a new repository on GitHub (let's call it target) with arbitrary name.
+First, create a target repository on GitHub with an arbitrary name.
 
 Then create a SSH key pair by entering this command in terminal
 {{< highlight bash >}}
@@ -46,9 +46,9 @@ Now open settings of your target repository on GitHub and go into `Deploy keys`.
  ![Deploykey](/new_site/deploykey.png)
  (your fingerprint may differ)
 
-Then go into source repository settings, click `Secrets`, then `New Secret`, name it `ACTIONS_DEPLOY_KEY` and paste the contents of `githubpages.pub` into `value` to see this picture ![Secret](/new_site/secretkey.png)
+Then go into source repository settings, click `Secrets`, then `New Secret`, name it `ACTIONS_DEPLOY_KEY` and paste the contents of `githubpages.pub` into `value` and click `Add` - you'll see this ![Secret](/new_site/secretkey.png)
 
-Finally create a file `.github/workflows/pages.yml` in the root directory of your source repository with the following content
+Now create a file `.github/workflows/pages.yml` in the root directory of your source repository with the following content
 
 {{< highlight yaml >}}
 name: publish hugo site
@@ -81,9 +81,9 @@ jobs:
         publish_branch: master
         external_repository: [YOUR GITHUB USERNAME]/[YOUR TARGET REPOSITORY NAME]
 {{< / highlight >}}
-(don't forget to replace with yours credentials)
+(don't forget to insert your credentials)
 
-Push it to source repository and behold how your target will magically update! The final step here is to enable GitHub Pages hosting. Go to the settings of the target repostory, scroll down to `GitHub Pages` and select `master` branch under `source`. If you'd like to enable CloudFlare proxy (in the next section) make sure to tick off `Enforce HTTPS`, as CloudFlare would provide you another free SSL certificate and somehow it [doesn't play nicely](https://community.cloudflare.com/t/github-pages-require-disabling-cfs-http-proxy/147401) with the certificate that GitHub will provide you.
+Push it to GitHub and behold how your target repository will magically update! The final step here is to enable GitHub Pages hosting. Go to the settings of the target repostory, scroll down to `GitHub Pages` and select `master` branch under `source`. If you'd like to enable CloudFlare proxy (in the next section) make sure to tick off `Enforce HTTPS`, as CloudFlare would provide you another free SSL certificate and somehow it [doesn't play nicely](https://community.cloudflare.com/t/github-pages-require-disabling-cfs-http-proxy/147401) with GitHub Pages.
 After that you'll see a message "Your site is ready to be published at [LINK]". Click it and enjoy!
 
 # Custom domain and CDN+SSL support with CloudFlare
@@ -94,7 +94,7 @@ The site kinda works and magically updates, but the domain
 <span style="color:green;">https://iam.irish</span>.
 {{< /rawhtml >}} Also the bandwidth constraint can become a problem, so it would be great to use a CDN provider that will cache most requests to your website and also make it more available to the world. And thankfully CloudFlare gives us that chance. In this section I'll tell about adding a fancy domain name and using CloudFlare proxy.
 
-  Nowadays there are a lot of domain registrars that enable you to rent a domain name for few years, choose one that will have the most nice price - this is the only thing for which you'll probably need to pay, but some cool name should worth it! After you rented a domain [YOUR DOMAIN NAME] make the following change to `Deploy` step in `pages.yml` file.
+  Nowadays there are a lot of domain registrars that enable you to rent a domain name for a few years. Choose one that will have the most nice price - this is the only thing for which you'll probably need to pay, but a cool name should worth it! After you rented a domain named [YOUR DOMAIN NAME] make the following change to `Deploy` step in `pages.yml` file.
 {{< highlight yaml >}}
  with:
    cname: [YOUR DOMAIN NAME]
@@ -105,14 +105,14 @@ The site kinda works and magically updates, but the domain
    external_repository: [YOUR GITHUB USERNAME]/[YOUR TARGET REPOSITORY NAME]
 {{< / highlight >}}
 
-After that register on CloudFlare, click `Add Site`, enter [YOUR DOMAIN ADDRESS] - CloudFlare will setup DNS records for you like this
+After that, register on CloudFlare, click `Add Site`, enter [YOUR DOMAIN NAME] - CloudFlare will setup DNS records for you
 ![cflare](/new_site/cflare.png)
 
 Then set SSL mode to "Full (strict)" for better security.
-The last step is to add CloudFlare nameservers in the dashboard of your domain registrar - for Hostinger provider the form is this
+The last step is to add CloudFlare nameservers in the dashboard of your domain registrar - for Hostinger provider the form looks like this
 ![hostinger](/new_site/hostinger.png)
 
-After some time your site should be available at [YOUR DOMAIN NAME]. Hooray!
+After some time your, site should become available at [YOUR DOMAIN NAME]. Hooray!
 
-If you got any issues on some step feel free to ask me - we'll search for a solution on Google together.
+If you got any issues on any step, feel free to ask me - we'll search for a solution with Google together.
 
