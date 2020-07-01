@@ -3,3 +3,5 @@
     <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>
    with <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a> {{ i18n "theme" }}.
 </p>
+{{ if .Params.katex}}{{ partial "katex.html" . }}{{ end }}
+
