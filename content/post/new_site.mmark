@@ -43,10 +43,11 @@ This will create `githubpages` and `githubpages.pub` files in your directory.
 
 Now open settings of your target repository on GitHub and go into `Deploy keys`. Click `Add deploy key`, set the title to your favorite dog name (or any arbitrary string) and paste the content of
  `githubpages` into `Key` field. Don't forget to tick `Allow write access`. Click `Add key`. You'll see something like this
- ![Deploykey](/new_site/deploykey.png)
+ {{< img src="/new_site/deploykey.png" >}}
  (your fingerprint may differ)
 
-Then go into source repository settings, click `Secrets`, then `New Secret`, name it `ACTIONS_DEPLOY_KEY` and paste the contents of `githubpages.pub` into `value` and click `Add` - you'll see this ![Secret](/new_site/secretkey.png)
+Then go into source repository settings, click `Secrets`, then `New Secret`, name it `ACTIONS_DEPLOY_KEY` and paste the contents of `githubpages.pub` into `value` and click `Add` - you'll see this
+ {{< img src="/new_site/secretkey.png" >}}
 
 Now create a file `.github/workflows/pages.yml` in the root directory of your source repository with the following content
 
@@ -106,11 +107,11 @@ The site kinda works and magically updates, but the domain
 {{< / highlight >}}
 
 After that, register on CloudFlare, click `Add Site`, enter [YOUR DOMAIN NAME] - CloudFlare will setup DNS records for you
-![cflare](/new_site/cflare.png)
+{{< img src="/new_site/cflare.png" >}}
 
 Then set SSL mode to "Full (strict)" for better security.
 The last step is to add CloudFlare nameservers in the dashboard of your domain registrar - for Hostinger provider the form looks like this
-![hostinger](/new_site/hostinger.png)
+{{< img src="/new_site/hostinger.png" >}}
 
 After some time your, site should become available at [YOUR DOMAIN NAME]. Hooray!
 
