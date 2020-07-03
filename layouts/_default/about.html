@@ -21,9 +21,9 @@
 </article>
 
 
-<ul>
+<ul class="contactlist">
     {{ range .Site.Data.contacts.myContacts}}
-    <li>
+    <li >
 <!--        <i class="fab fa-{{ lower .name }}" aria-hidden="true"></i>-->
         <a href="{{ .url }}" target="_blank"><i class="fab fa-{{ lower .name }} fa-fw icon" aria-hidden="true"></i> {{ .name }}</a>
     </li>
