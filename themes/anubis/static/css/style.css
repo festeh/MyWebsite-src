@@ -122,8 +122,7 @@ th, td {
     /*border: 1px double lightgrey;*/
 }
 
-
-ul {
+.contactlist {
     list-style-type: none;
     padding: 0 0 0 5px;
     margin: 0;
@@ -434,6 +433,12 @@ ul.language-select > li {
 
 blockquote {
     font-style: italic;
+}
+
+.consent {
+  border: 1px solid;
+  padding: 1em;
+  border-radius: 5px;
 }
 
 /* Media Queries */
