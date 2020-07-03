@@ -1,0 +1,11 @@
+{{ define "main" }}{{ if .Menus }}
+<nav class="post-navigation">
+    {{ range .Menus }} <a href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a> {{end }}
+</nav>{{ end }}
+<article>
+    <h1>Privacy Policy</h1>
+    <div class="content">
+        {{ .Content }}
+    </div>
+</article>
+{{ end }}

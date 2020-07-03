@@ -12,6 +12,11 @@ menu:
     name: About
     title: About
     url: /about/
+    weight: 10
+  - identifier: privacy
+    name: Privacy
+#    title: Privacy Policy
+    url: /privacy_policy/
     weight: 1
 
 
@@ -25,6 +30,12 @@ params:
   paginationSinglePost: true
   tabTitle: "Dima Lipin's Personal Website"
 
+privacy:
+  googleAnalytics:
+    anonymizeIP: false
+    disable: false
+    respectDoNotTrack: true
+    useSessionStorage: false
 
 markup:
   goldmark:
