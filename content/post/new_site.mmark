@@ -8,8 +8,8 @@ markup: "mmark"
 ---
 # Introduction
 One day I came up with an idea to create a technical blog to share knowledge with the world. While the most obvious idea is to use Medium, I don't like it very much because of its nagging "3 free articles per month" feature. Besides, while there are so many people writing about Machine Learning there, Medium owners cannot simply add the ability to write in LaTeX without tricks like pasting images with rendered formulas. So I decided to create a personal website.
-$$\mathcal{L}_{D}^{GAN} =
-\mathbb{E}_{x \sim p_{d}}[\log D(x)] - \mathbb{E}_{\hat x \sim p_{g}}[\log (1 - D(\hat x))]
+
+$$\mathcal{L}_{D}^{GAN} = \mathbb{E}_{x \sim p_{d}}[\log D(x)] - \mathbb{E}_{\hat x \sim p_{g}}[\log (1 - D(\hat x))]
 $$ - take this, Medium!
 
 There are plenty of options that will instantly generate your site like Wordpress, but as Fred Durst told us:
