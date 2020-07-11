@@ -22,13 +22,12 @@
 
 
 <ul class="contactlist">
+    <li> <a href="mailto:d.lipin@outlook.com?subject=Wow, nice site!"><i class="fa fa-envelope fa-fw icon" aria-hidden="true"></i> Email</a></li>
     {{ range .Site.Data.contacts.myContacts}}
     <li >
-<!--        <i class="fab fa-{{ lower .name }}" aria-hidden="true"></i>-->
         <a href="{{ .url }}" target="_blank"><i class="fab fa-{{ lower .name }} fa-fw icon" aria-hidden="true"></i> {{ .name }}</a>
     </li>
     {{ end }}
-
 </ul>
 
 
