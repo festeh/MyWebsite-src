@@ -28,7 +28,7 @@ params:
     - images/og-featured.png # relative path to "static" directory
   dateFormat: "2 Jan 06"
   paginationSinglePost: true
-  tabTitle: "Dima Lipin's Personal Website"
+  title: "Dima Lipin's Personal Website"
 
 privacy:
   googleAnalytics:

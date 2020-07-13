@@ -1,4 +1,5 @@
 ---
+title: "Privacy Policy"
 date: 2020-07-02T22:16:06+03:00
 draft: false
 layout: privacy_policy
