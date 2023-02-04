@@ -12,7 +12,7 @@ menu:
     name: About
     title: About
     url: /about/
-    weight: 10
+    weight: 11
   - identifier: privacy
     name: Privacy
 #    title: Privacy Policy
